@@ -177,7 +177,8 @@ jQuery.fn.KBELiveSearch = function (conf) {
 
 						var data = {
 							'action' : 'kbe_action_ajax_get_live_search_results',
-							'search' : q
+							'search' : q,
+							'nonce'  : ( typeof kbe_search_vars !== 'undefined' ) ? kbe_search_vars.nonce : ''
 						};
 
 						jQuery.post( config.url, data, function( response ) {

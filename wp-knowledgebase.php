@@ -3,8 +3,8 @@
  * Plugin Name: WP Knowledgebase
  * Plugin URI: http://wordpress.org/plugins/wp-knowledgebase
  * Description: Simple and flexible knowledgebase plugin for WordPress
- * Version: 1.3.4
- * Author: Mihai Iova
+ * Version: 2.0.0
+ * Author: SurfHost (Originally by Mihai Iova)
  * Author URI: https://usewpknowledgebase.com/
  * Text Domain: wp-knowledgebase
  * License: GPL2
@@ -70,7 +70,7 @@ Class WP_Knowledgebase {
 	public function __construct() {
 
 		// Defining new constants
-		define( 'KBE_PLUGIN_VERSION', '1.3.4' );
+		define( 'KBE_PLUGIN_VERSION', '2.0.0' );
 		define( 'KBE_BASENAME',  	  plugin_basename( __FILE__ ) );
 		define( 'KBE_PLUGIN_DIR', 	  plugin_dir_path( __FILE__ ) );
 		define( 'KBE_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -180,15 +180,9 @@ Class WP_Knowledgebase {
 		 * Include abstract classes
 		 *
 		 */
-		$abstracts = scandir( KBE_PLUGIN_DIR . 'includes/abstracts' );
-
-		foreach( $abstracts as $abstract ) {
-
-			if( false === strpos( $abstract, '.php' ) )
-				continue;
-
-			include KBE_PLUGIN_DIR . 'includes/abstracts/' . $abstract;
-
+		$abstract_files = glob( KBE_PLUGIN_DIR . 'includes/abstracts/abstract-*.php' );
+		foreach( $abstract_files as $abstract_file ) {
+			include $abstract_file;
 		}
 
 		/**
@@ -243,10 +237,10 @@ Class WP_Knowledgebase {
 		 * Include theme compatibility file
 		 *
 		 */
-		$active_theme = get_option( 'template' );
+		$active_theme = sanitize_file_name( get_option( 'template' ) );
 
 		if( file_exists( KBE_PLUGIN_DIR . 'includes/theme-support/' . $active_theme . '.php' ) )
-			require 'includes/theme-support/' . $active_theme . '.php';
+			require KBE_PLUGIN_DIR . 'includes/theme-support/' . $active_theme . '.php';
 
 		/**
 		 * Helper hook to include files early

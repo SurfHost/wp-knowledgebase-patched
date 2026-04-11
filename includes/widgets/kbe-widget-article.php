@@ -44,7 +44,7 @@ class kbe_Article_Widget extends WP_Widget {
 		echo '<div class="kbe_widget kbe-widget kbe_widget_article widget">';
 
 				if ( $kbe_widget_article_title ) {
-					echo $default_sidebar_args['before_title'] . $kbe_widget_article_title . $default_sidebar_args['after_title'];
+					echo $default_sidebar_args['before_title'] . esc_html( $kbe_widget_article_title ) . $default_sidebar_args['after_title'];
 				}
 
 				if ( $kbe_widget_article_orderby == 'popularity' ) {
@@ -98,10 +98,10 @@ class kbe_Article_Widget extends WP_Widget {
 		$widgetData = $old_widgetData;
 
 		//Strip tags from title and name to remove HTML
-		$widgetData['txtKbeArticleHeading'] = $new_widgetData['txtKbeArticleHeading'];
-		$widgetData['txtKbeArticleCount']   = $new_widgetData['txtKbeArticleCount'];
-		$widgetData['txtKbeArticleOrder']   = $new_widgetData['txtKbeArticleOrder'];
-		$widgetData['txtKbeArticleOrderBy'] = $new_widgetData['txtKbeArticleOrderBy'];
+		$widgetData['txtKbeArticleHeading'] = sanitize_text_field( $new_widgetData['txtKbeArticleHeading'] );
+		$widgetData['txtKbeArticleCount']   = absint( $new_widgetData['txtKbeArticleCount'] );
+		$widgetData['txtKbeArticleOrder']   = sanitize_text_field( $new_widgetData['txtKbeArticleOrder'] );
+		$widgetData['txtKbeArticleOrderBy'] = sanitize_text_field( $new_widgetData['txtKbeArticleOrderBy'] );
 
 		return $widgetData;
 	}

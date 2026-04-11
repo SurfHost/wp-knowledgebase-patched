@@ -10,7 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function kbe_action_ajax_get_live_search_results() {
 
-	if( ! isset( $_POST['search'] ) )
+	if( ! isset( $_POST['search'] ) || ! isset( $_POST['nonce'] ) )
+		wp_die( 0 );
+
+	if( ! wp_verify_nonce( $_POST['nonce'], 'kbe_live_search' ) )
 		wp_die( 0 );
 
 	$posts_args = array(

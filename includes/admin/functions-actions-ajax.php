@@ -13,6 +13,9 @@ function kbe_action_ajax_register_website() {
 	if( empty( $_POST['kbe_token'] ) || ! wp_verify_nonce( $_POST['kbe_token'], 'kbe_save_settings' ) )
 		wp_die(0);
 
+	if( ! current_user_can( 'manage_options' ) )
+		wp_die(0);
+
 	if( empty( $_POST['license_key'] ) )
 		wp_die(0);
 
@@ -20,7 +23,7 @@ function kbe_action_ajax_register_website() {
 	$website_url = get_site_url();
 
 	// Call the API link
-	$response = wp_remote_get( add_query_arg( array( 'edde_api_action' => 'register_website', 'license_key' => $license_key, 'url' => $website_url ), 'https://usewpknowledgebase.com/' ), array( 'timeout' => 30, 'sslverify' => false ) );
+	$response = wp_remote_get( add_query_arg( array( 'edde_api_action' => 'register_website', 'license_key' => $license_key, 'url' => $website_url ), 'https://usewpknowledgebase.com/' ), array( 'timeout' => 30 ) );
 
 	// If the connection isn't successfull, return
 	if( is_wp_error( $response ) ) {
@@ -64,6 +67,9 @@ function kbe_action_ajax_deregister_website() {
 	if( empty( $_POST['kbe_token'] ) || ! wp_verify_nonce( $_POST['kbe_token'], 'kbe_save_settings' ) )
 		wp_die(0);
 
+	if( ! current_user_can( 'manage_options' ) )
+		wp_die(0);
+
 	if( empty( $_POST['license_key'] ) )
 		wp_die(0);
 
@@ -71,7 +77,7 @@ function kbe_action_ajax_deregister_website() {
 	$website_url = get_site_url();
 
 	// Call the API link
-	$response = wp_remote_get( add_query_arg( array( 'edde_api_action' => 'deregister_website', 'license_key' => $license_key, 'url' => $website_url ), 'https://usewpknowledgebase.com/' ), array( 'timeout' => 30, 'sslverify' => false ) );
+	$response = wp_remote_get( add_query_arg( array( 'edde_api_action' => 'deregister_website', 'license_key' => $license_key, 'url' => $website_url ), 'https://usewpknowledgebase.com/' ), array( 'timeout' => 30 ) );
 
 	// If the connection isn't successfull, return
 	if( is_wp_error( $response ) ) {

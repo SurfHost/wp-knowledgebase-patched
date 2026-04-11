@@ -35,6 +35,9 @@ function kbe_styles() {
 
 		wp_register_script( 'kbe_live_search_script', WP_KNOWLEDGEBASE . '/assets/js/script-live-search.js', array( 'jquery' ), KBE_PLUGIN_VERSION, true );
 		wp_enqueue_script( 'kbe_live_search_script' );
+		wp_localize_script( 'kbe_live_search_script', 'kbe_search_vars', array(
+			'nonce' => wp_create_nonce( 'kbe_live_search' ),
+		) );
 
 	}
 

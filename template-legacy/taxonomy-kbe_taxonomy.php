@@ -67,7 +67,7 @@ $kbe_tax_post_qry  = new WP_Query( $kbe_tax_post_args );
 
             <!--<articles>-->
             <div class="kbe_articles">
-                <h2><strong><?php echo $kbe_cat_name; ?></strong></h2>
+                <h2><strong><?php echo esc_html( $kbe_cat_name ); ?></strong></h2>
 
                 <ul><?php
 					if ( $kbe_tax_post_qry->have_posts() ) :

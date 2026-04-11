@@ -42,7 +42,7 @@ class kbe_Search_Widget extends WP_Widget {
 		echo '<div class="kbe_widget kbe-widget widget">';
 
 		if ( $kbe_widget_search_title ) {
-			echo $default_sidebar_args['before_title'] . $kbe_widget_search_title . $default_sidebar_args['after_title'];
+			echo $default_sidebar_args['before_title'] . esc_html( $kbe_widget_search_title ) . $default_sidebar_args['after_title'];
 		}
 	?>
         <form role="search" method="get" id="searchform" class="clearfix" action="<?php echo home_url( '/' ); ?>" autocomplete="off">
@@ -58,7 +58,7 @@ class kbe_Search_Widget extends WP_Widget {
 	function update( $new_widgetData, $old_widgetData ) {
 		$widgetData                        = $old_widgetData;
 		//Strip tags from title and name to remove HTML
-		$widgetData['txtKbeSearchHeading'] = $new_widgetData['txtKbeSearchHeading'];
+		$widgetData['txtKbeSearchHeading'] = sanitize_text_field( $new_widgetData['txtKbeSearchHeading'] );
 		return $widgetData;
 	}
 

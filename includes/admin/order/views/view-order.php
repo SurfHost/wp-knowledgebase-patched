@@ -10,12 +10,24 @@ global $post;
 <?php
     $message = '';
     if ( isset( $_POST['kbe_order_submit'] ) ) {
+        if ( !isset( $_POST['kbe_order_nonce'] ) || !wp_verify_nonce( $_POST['kbe_order_nonce'], 'kbe_order_action' ) ) {
+            wp_die( 'Security check failed.' );
+        }
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( 'You do not have permission to perform this action.' );
+        }
         kbe_parent_article_order_update();
     }
 
     $message = '';
 
     if ( isset( $_POST['kbe_article_submit'] ) ) {
+        if ( !isset( $_POST['kbe_order_nonce'] ) || !wp_verify_nonce( $_POST['kbe_order_nonce'], 'kbe_order_action' ) ) {
+            wp_die( 'Security check failed.' );
+        }
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_die( 'You do not have permission to perform this action.' );
+        }
         kbe_custom_article_order_update();
     }
 ?>
@@ -41,6 +53,7 @@ global $post;
                 <div class="kbe-card-inner">
 
                     <form name="custom_order_form" method="post" action="">
+                        <?php wp_nonce_field( 'kbe_order_action', 'kbe_order_nonce' ); ?>
                         <?php
                             $kbe_parent_ID = 0;
                             $kbe_args      = array(
@@ -124,6 +137,7 @@ global $post;
                 <div class="kbe-card-inner">
 
                     <form name="custom_order_form" method="post" action="">
+                        <?php wp_nonce_field( 'kbe_order_action', 'kbe_order_nonce' ); ?>
                         <?php
                             $kbe_article_args = new WP_Query( array(
                                                         'post_type' => 'kbe_knowledgebase',
@@ -217,7 +231,7 @@ global $post;
                 //print_r($parent_IDs).'<br />';
                 $parent_result    = count( $parent_IDs );
                 for ( $p = 0; $p < $parent_result; $p++ ) {
-                    $parent_str  = str_replace( 'kbe_parent_id_', '', $parent_IDs[ $p ] );
+                    $parent_str  = absint( str_replace( 'kbe_parent_id_', '', $parent_IDs[ $p ] ) );
                     //echo $parent_str."<br />";
                     $term_update = $wpdb->update( $wpdb->terms, array( 'terms_order' => $p ), array( 'term_id' => $parent_str ) );
                 }
@@ -239,7 +253,7 @@ global $post;
                 $article_result    = count( $article_IDs );
 
                 for ( $a = 0; $a < $article_result; $a++ ) {
-                    $article_str    = str_replace( 'kbe_article_id_', '', $article_IDs[ $a ] );
+                    $article_str    = absint( str_replace( 'kbe_article_id_', '', $article_IDs[ $a ] ) );
                     //echo $article_str."<br />";
                     $article_update = $wpdb->update( $wpdb->posts, array( 'menu_order' => $a ), array( 'ID' => $article_str ) );
                 }

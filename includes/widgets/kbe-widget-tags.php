@@ -41,7 +41,7 @@ class kbe_Tags_Widget extends WP_Widget {
 		echo '<div class="kbe_widget kbe-widget widget">';
 
 			if ( $kbe_widget_tag_title ) {
-				echo $default_sidebar_args['before_title'] . $kbe_widget_tag_title . $default_sidebar_args['after_title'];
+				echo $default_sidebar_args['before_title'] . esc_html( $kbe_widget_tag_title ) . $default_sidebar_args['after_title'];
 			}
 
 			?><div class="kbe_tags_widget"><?php
@@ -77,9 +77,9 @@ class kbe_Tags_Widget extends WP_Widget {
 		$widgetData = $old_widgetData;
 
 		//Strip tags from title and name to remove HTML
-		$widgetData['txtKbeTagsHeading'] = $new_widgetData['txtKbeTagsHeading'];
-		$widgetData['txtKbeTagsCount']   = $new_widgetData['txtKbeTagsCount'];
-		$widgetData['txtKbeTagsStyle']   = $new_widgetData['txtKbeTagsStyle'];
+		$widgetData['txtKbeTagsHeading'] = sanitize_text_field( $new_widgetData['txtKbeTagsHeading'] );
+		$widgetData['txtKbeTagsCount']   = absint( $new_widgetData['txtKbeTagsCount'] );
+		$widgetData['txtKbeTagsStyle']   = sanitize_text_field( $new_widgetData['txtKbeTagsStyle'] );
 
 		return $widgetData;
 	}

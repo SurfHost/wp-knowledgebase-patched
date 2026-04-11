@@ -72,12 +72,12 @@ if ( KBE_SIDEBAR_HOME == 0 ) {
 
 					$children = get_term_children( $kbe_term_id, KBE_POST_TAXONOMY );
 
-					$kbe_count_sum = $wpdb->get_var( "
+					$kbe_count_sum = $wpdb->get_var( $wpdb->prepare( "
 						SELECT Sum(count)
-						FROM {$wpdb->prefix}term_taxonomy
-						WHERE taxonomy = '" . KBE_POST_TAXONOMY . "'
-						And parent = $kbe_term_id
-					" );
+						FROM {$wpdb->term_taxonomy}
+						WHERE taxonomy = %s
+						AND parent = %d
+					", KBE_POST_TAXONOMY, $kbe_term_id ) );
 
 					$kbe_count_sum_parent = '';
 
@@ -92,8 +92,8 @@ if ( KBE_SIDEBAR_HOME == 0 ) {
                         <span class="kbe_count"><?php
 							echo sprintf( _n( '%d Article', '%d Articles', $kbe_count_sum_parent, 'wp-knowledgebase' ), $kbe_count_sum_parent );
 						?></span>
-                        <a href="<?php echo get_term_link( $kbe_term_slug, 'kbe_taxonomy' ); ?>"><?php
-							echo $kbe_term_name;
+                        <a href="<?php echo esc_url( get_term_link( $kbe_term_slug, 'kbe_taxonomy' ) ); ?>"><?php
+							echo esc_html( $kbe_term_name );
 						?></a>
                     </h2><?php
 
@@ -118,8 +118,8 @@ if ( KBE_SIDEBAR_HOME == 0 ) {
                                     <span class="kbe_count"><?php
 										echo sprintf( _n( '%d Article', '%d Articles', $kbe_child_term->count, 'wp-knowledgebase' ), $kbe_child_term->count );
 									?></span>
-                                    <a href="<?php echo get_term_link( $kbe_child_term_slug, 'kbe_taxonomy' ); ?>"><?php
-										echo $kbe_child_term_name;
+                                    <a href="<?php echo esc_url( get_term_link( $kbe_child_term_slug, 'kbe_taxonomy' ) ); ?>"><?php
+										echo esc_html( $kbe_child_term_name );
 									?></a>
                                 </h3>
                                 <ul class="kbe_child_article_list"><?php

@@ -66,7 +66,7 @@ $kbe_tag_post_qry  = new WP_Query( $kbe_tag_post_args );
         <div class="kbe_leftcol">
             <!--<articles>-->
             <div class="kbe_articles">
-                <h2><strong>Tag: </strong><?php echo $kbe_tag_name; ?></h2>
+                <h2><strong>Tag: </strong><?php echo esc_html( $kbe_tag_name ); ?></h2>
 
                 <ul><?php
 					if ( $kbe_tag_post_qry->have_posts() ) :

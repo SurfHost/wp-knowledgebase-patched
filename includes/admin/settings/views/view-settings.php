@@ -36,7 +36,7 @@ $active_tab = ( ! empty( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 
 
             if ( isset( $kbe_settings['update'] ) ) {
 
-                $kbe_posts = $wpdb->get_results( "SELECT * FROM $tbl_posts WHERE post_content LIKE '%[kbe_knowledgebase]%' AND post_type = 'page'" );
+                $kbe_posts = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->posts} WHERE post_content LIKE %s AND post_type = %s", '%[kbe_knowledgebase]%', 'page' ) );
 
                 foreach ( $kbe_posts as $kbe_post ) {
                     $kbe_id   = $kbe_post->ID;

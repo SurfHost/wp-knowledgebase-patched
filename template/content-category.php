@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 
 <header class="kbe-category-header">
-	<h1 class="kbe-category-title"><?php echo esc_attr( $kbe_cat_name ); ?></h1>
+	<h1 class="kbe-category-title"><?php echo esc_html( $kbe_cat_name ); ?></h1>
 
 	<?php if( ! empty( $kbe_cat_desc ) ): ?>
 		<div class="kbe-category-description"><?php echo wpautop( $kbe_cat_desc ); ?></div>
@@ -56,7 +56,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			<li class="kbe-object-list-item kbe-list-item-is-child-category">
 
 				<?php echo kbe_get_svg_icon( 'folder-open' ); ?>
-				<a href="<?php echo get_term_link( $kbe_child_term->slug, 'kbe_taxonomy' ); ?>"><?php echo esc_attr( $kbe_child_term->name ); ?></a>
+				<a href="<?php echo esc_url( get_term_link( $kbe_child_term->slug, 'kbe_taxonomy' ) ); ?>"><?php echo esc_html( $kbe_child_term->name ); ?></a>
 
 				<ul class="kbe-object-list kbe-no-margin kbe-no-padding">
 

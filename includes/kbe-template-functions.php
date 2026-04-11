@@ -347,7 +347,7 @@ function kbe_output_breadcrumbs( $args = array() ) {
 					<li class="kbe-breadcrumbs-part"><a href="<?php echo esc_url( $part['href'] ); ?>"><?php echo wp_kses_post( $part['text'] ); ?></a></li>
 
 					<?php if ( $k !== end( $keys ) ): ?>
-						<li class="kbe-breadcrumbs-separator"> <?php echo $args['separator']; ?> </li>
+						<li class="kbe-breadcrumbs-separator"> <?php echo wp_kses_post( $args['separator'] ); ?> </li>
 					<?php endif; ?>
 
 				<?php endforeach; ?>
@@ -546,14 +546,6 @@ function template_chooser( $template ) {
 
 	global $wp_query;
 	
-	/*
-	* Fixed Securty Issue: XSS - Vulnerable
-	* Removing special character on query
-	*/
-	if (is_search()) {
-	   $_GET["s"] = preg_replace('/[^a-zA-Z0-9-_ \.]/','', $_GET["s"]);
-	}
-
 	$post_type = get_query_var( 'post_type' );
 
 	if ( $wp_query->is_search && $post_type == KBE_POST_TYPE ) {

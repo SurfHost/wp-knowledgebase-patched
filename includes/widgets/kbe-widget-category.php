@@ -40,7 +40,7 @@ class kbe_Cat_Widget extends WP_Widget {
 		echo '<div class="kbe_widget kbe-widget widget">';
 
 			if ( $kbe_widget_cat_title ) {
-				echo $default_sidebar_args['before_title'] . $kbe_widget_cat_title . $default_sidebar_args['after_title'];
+				echo $default_sidebar_args['before_title'] . esc_html( $kbe_widget_cat_title ) . $default_sidebar_args['after_title'];
 			}
 
 			$kbe_cat_args = array(
@@ -71,8 +71,8 @@ class kbe_Cat_Widget extends WP_Widget {
 		$widgetData = $old_widgetData;
 
 		//Strip tags from title and name to remove HTML
-		$widgetData['txtKbeCatHeading'] = $new_widgetData['txtKbeCatHeading'];
-		$widgetData['txtKbeCatCount']   = $new_widgetData['txtKbeCatCount'];
+		$widgetData['txtKbeCatHeading'] = sanitize_text_field( $new_widgetData['txtKbeCatHeading'] );
+		$widgetData['txtKbeCatCount']   = absint( $new_widgetData['txtKbeCatCount'] );
 
 		return $widgetData;
 	}
