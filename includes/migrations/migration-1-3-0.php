@@ -136,9 +136,9 @@ class KBE_Migration_1_3_0 extends KBE_Abstract_Migration {
 			<div class="notice notice-warning">
 				<p><h3 style="margin-top: 0; margin-bottom: 5px;"><?php echo __( 'WP Knowledgebase Important Notice', 'wp-knowledgebase' ); ?></h3></p>
 				<p><?php echo __( 'Starting with version 1.3.0, WP Knowledgebase comes with a new template system, simpler, extendable and easier to adapt to any theme.', 'wp-knowledgebase' ); ?></p>
-				<p><?php echo __( 'By default, the old (or legacy) template system will continue to run on your website. However, we recommend switching to the new one as soon as possible.', 'wp-knowledgebase' ); ?> <a href="https://usewpknowledgebase.com/blog/new-template-system/#how-to-switch" target="_blank"><?php echo __( 'Click here to learn how.', 'wp-knowledgebase' ); ?></a></p>
+				<p><?php echo __( 'By default, the old (or legacy) template system will continue to run on your website. However, we recommend switching to the new one as soon as possible.', 'wp-knowledgebase' ); ?></p>
 				<p><?php echo __( 'Both template systems will be supported for the time being, however, the legacy system will eventually be discontinued.', 'wp-knowledgebase' ); ?></p>
-				<p><?php echo sprintf( __( 'For all the details about the new template system, %splease read this article%s.', 'wp-knowledgebase' ), '<a href="https://usewpknowledgebase.com/blog/new-template-system/" target="_blank">', '</a>' ); ?> <?php echo sprintf( __( 'If you have any questions, %scontact us here%s', 'wp-knowledgebase' ), '<a href="https://usewpknowledgebase.com/contact/" target="_blank">', '</a>' ); ?></p>
+				<p><?php echo __( 'Both template systems will continue to be supported.', 'wp-knowledgebase' ); ?></p>
 				<p><a href="<?php echo esc_url( $href ); ?>" class="button button-primary"><?php echo __( 'Thank you, I understand', 'wp-knowledgebase' ); ?></a></p>
 			</div>
 

@@ -4,13 +4,13 @@
  * Plugin URI: http://wordpress.org/plugins/wp-knowledgebase
  * Description: Simple and flexible knowledgebase plugin for WordPress
  * Version: 2.0.0
- * Author: SurfHost (Originally by Mihai Iova)
- * Author URI: https://usewpknowledgebase.com/
+ * Author: SurfHost
+ * Author URI: https://surfhost.nl
  * Text Domain: wp-knowledgebase
  * License: GPL2
  *
  * == Copyright ==
- * Copyright 2020 WP Knowledgebase
+ * Copyright 2020 Mihai Iova, 2026 SurfHost
  *	
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -471,7 +471,6 @@ Class WP_Knowledgebase {
 	public function add_plugin_action_links( $links ) {
 
 		array_unshift( $links, '<a href="' . esc_url( add_query_arg( array( 'post_type' => KBE_POST_TYPE, 'page' => 'kbe-settings' ), admin_url( 'edit.php' ) ) ) . '">' . __( 'Settings', 'wp-knowledgebase' ) . '</a>' );
-		array_unshift( $links, '<a href="' . esc_url( 'https://usewpknowledgebase.com/?utm_source=page-plugins&utm_medium=plugin-admin&utm_campaign=KBEFree' ) . '" target="_blank">' . __( 'Upgrade', 'wp-knowledgebase' ) . '</a>' );
 
 		return $links;
 

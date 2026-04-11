@@ -86,31 +86,4 @@ add_filter( 'kbe_register_submenu_page', 'kbe_register_submenu_page_promo_search
  * the content restriction add-on
  *
  */
-function kbe_view_promo_content_restriction() {
-
-	?>
-
-		<!-- Content Restriction -->
-        <div class="kbe-card">
-
-            <div class="kbe-card-header">
-                <?php echo __( 'Content Restriction', 'wp-knowledgebase' ); ?>
-                <a class="kbe-promo-pill" href="http://usewpknowledgebase.com/" target="_blank"><?php echo __( 'Pro Feature', 'wp-knowledgebase' ); ?></a>
-            </div>
-
-            <div class="kbe-card-inner">
-
-            	<div style="position: relative; background: #f6f6f6; border-radius: 4px; padding: 15px 15px 15px 60px;">
-	                <span class="dashicons dashicons-lock" style="position: absolute; top: 15px; left: 15px; font-size: 30px; width: 30px; height: 30px;"></span>
-	                <p style="margin-top: 0;"><?php echo __( 'Restrict access, by user role or individual users, to your knowledgebase articles and redirect unauthorized users to a custom link.', 'wp-knowledgebase' ); ?></p>
-	                <a href="http://usewpknowledgebase.com/" target="_blank" class="kbe-button-secondary"><?php echo __( 'Learn more', 'wp-knowledgebase' ) ?></a>
-	            </div>
-
-            </div>
-
-        </div><!-- / Content Restriction -->
-
-	<?php
-
-}
-add_action( 'kbe_view_settings_tab_general_bottom', 'kbe_view_promo_content_restriction' );
+// Content restriction promo removed — no longer linking to external site.

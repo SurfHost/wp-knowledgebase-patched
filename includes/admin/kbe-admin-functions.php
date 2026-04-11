@@ -41,7 +41,7 @@ function kbe_admin_body_class( $classes ) {
 	if( empty( $screen ) )
 		return $classes;
 
-	if( ! empty( $_GET['page'] ) && false !== strpos( $_GET['page'], 'kbe' ) )
+	if( ! empty( $_GET['page'] ) && false !== strpos( sanitize_text_field( wp_unslash( $_GET['page'] ) ), 'kbe' ) )
 		$classes .= ' kbe-pagestyles';
 
 	if( $screen->base == 'post' && $screen->post_type == 'kbe_knowledgebase' )
@@ -64,7 +64,7 @@ add_filter( 'admin_body_class', 'kbe_admin_body_class' );
 function kbe_admin_scripts( $hook_suffix ) {
 
 	// Settings page
-	if( ( ! empty( $_GET['page'] ) && false !== strpos( $_GET['page'], 'kbe' ) ) || get_post_type() == 'kbe_knowledgebase' ) {
+	if( ( ! empty( $_GET['page'] ) && false !== strpos( sanitize_text_field( wp_unslash( $_GET['page'] ) ), 'kbe' ) ) || get_post_type() == 'kbe_knowledgebase' ) {
 
 		wp_enqueue_style( 'wp-color-picker' );
 
@@ -80,26 +80,26 @@ function kbe_admin_scripts( $hook_suffix ) {
 
 	}
 
-	if( ! empty( $_GET['post_type'] ) && false !== strpos( $_GET['post_type'], 'kbe_knowledgebase' ) ) {
+	if( ! empty( $_GET['post_type'] ) && false !== strpos( sanitize_text_field( wp_unslash( $_GET['post_type'] ) ), 'kbe_knowledgebase' ) ) {
 
 		wp_enqueue_script( 'kbe-script', WP_KNOWLEDGEBASE . 'assets/js/script-admin.js', array( 'wp-color-picker', 'jquery-ui-datepicker' ), KBE_PLUGIN_VERSION, true );
 	
 	}
 
 	// Order page
-	if ( ! empty( $_GET['page'] ) && $_GET['page'] == 'kbe-order' ) {
+	if ( ! empty( $_GET['page'] ) && sanitize_text_field( wp_unslash( $_GET['page'] ) ) == 'kbe-order' ) {
 		wp_enqueue_script( 'jquery-ui-sortable' );
 	}
 
 	// Old plugin styles
 	wp_register_style( 'kbe_admin_css', WP_KNOWLEDGEBASE . '/assets/css/kbe-admin-style.css', array(), KBE_PLUGIN_VERSION );
-	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == 'kbe_knowledgebase' ) {
+	if ( isset( $_GET['post_type'] ) && sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) == 'kbe_knowledgebase' ) {
 		wp_enqueue_style( 'kbe_admin_css' );
 	}
 
 	// New plugin styles
 	wp_register_style( 'kbe-style', WP_KNOWLEDGEBASE . '/assets/css/style-admin.css', array(), KBE_PLUGIN_VERSION );
-	if ( ( isset( $_GET['post_type'] ) && $_GET['post_type'] == 'kbe_knowledgebase' ) || get_post_type() == 'kbe_knowledgebase' ) {
+	if ( ( isset( $_GET['post_type'] ) && sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) == 'kbe_knowledgebase' ) || get_post_type() == 'kbe_knowledgebase' ) {
 		wp_enqueue_style( 'kbe-style' );
 	}
 
@@ -335,8 +335,11 @@ function kbe_admin_notice_dismiss() {
 	if( ! current_user_can( 'activate_plugins' ) )
 		return;
 
-	if( isset( $_GET['kbe_admin_notice_plugin_version_1_2_4'] ) )
+	if( isset( $_GET['kbe_admin_notice_plugin_version_1_2_4'] ) ) {
+		// Value is not used, just checking for key presence — sanitize for consistency
+		sanitize_text_field( wp_unslash( $_GET['kbe_admin_notice_plugin_version_1_2_4'] ) );
 		add_user_meta( get_current_user_id(), 'kbe_admin_notice_plugin_version_1_2_4', 1, true );
+	}
 
 }
 add_action( 'admin_init', 'kbe_admin_notice_dismiss' );
@@ -346,38 +349,14 @@ add_action( 'admin_init', 'kbe_admin_notice_dismiss' );
  * Adds external links to the admin submenu
  *
  */
-function kbe_add_admin_menu_external_items() {
-
-	global $submenu;
-
-	if( empty( $submenu ) || ! is_array( $submenu ) )
-		return;
-
-	if( ! isset( $submenu['edit.php?post_type=kbe_knowledgebase'] ) )
-		return;
-
-	$submenu['edit.php?post_type=kbe_knowledgebase'][1000] = array( '<span style="color: #4cd137;">' . __( 'Upgrade', 'wp-knowledgebase' ) . '&nbsp;&rarr;' . '</span>', 'manage_options', 'https://usewpknowledgebase.com/' );
-
-}
-add_action( 'admin_init', 'kbe_add_admin_menu_external_items', 1000 );
+// Upgrade submenu item removed — no longer linking to external site.
 
 
 /**
  * Adds a script to make external links to the site open in a new tab
  *
  */
-function kbe_external_menu_items_script() {
-	?>
-
-	<script>
-		jQuery( function($) {
-			$('a[href="https://usewpknowledgebase.com/"]').attr( 'target', '_blank' );
-		});
-	</script>
-
-	<?php
-}
-add_action( 'admin_footer', 'kbe_external_menu_items_script', 1000 );
+// External menu items script removed — no longer linking to external site.
 
 
 /**
@@ -386,42 +365,14 @@ add_action( 'admin_footer', 'kbe_external_menu_items_script', 1000 );
  */
 function kbe_admin_header() {
 
-	if( empty( $_GET['post_type'] ) || false === strpos( $_GET['post_type'], 'kbe_knowledgebase' ) )
+	if( empty( $_GET['post_type'] ) || false === strpos( sanitize_text_field( wp_unslash( $_GET['post_type'] ) ), 'kbe_knowledgebase' ) )
 		return;
 
 	?>
 
 	<div id="kbe-header">
-		<a href="https://usewpknowledgebase.com/" target="_blank">
-			<img src="<?php echo KBE_PLUGIN_DIR_URL; ?>/assets/images/kbe-logo.png" />
-			WP Knowledgebase
-		</a>
-
-		<nav>
-			<a href="https://usewpknowledgebase.com/contact/?topic=Technical%20Issue&amp;utm_source=header&amp;utm_medium=plugin-admin&amp;utm_campaign=KBEFree" target="_blank">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				Report bug
-			</a>
-
-			<span>|</span>
-
-			<a href="https://usewpknowledgebase.com/contact/?topic=Feature%20Request&amp;utm_source=header&amp;utm_medium=plugin-admin&amp;utm_campaign=KBEFree" target="_blank">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				Request feature
-			</a>
-
-			<span>|</span>
-
-			<a href="https://usewpknowledgebase.com/contact/?utm_source=header&amp;utm_medium=plugin-admin&amp;utm_campaign=KBEFree" target="_blank">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-				Get help
-			</a>
-
-			<?php if( ! kbe_is_website_registered() ): ?>
-				<a href="https://usewpknowledgebase.com/?utm_source=header&amp;utm_medium=plugin-admin&amp;utm_campaign=KBEFree" target="_blank" class="kbe-header-button-upgrade"><?php echo __( 'Upgrade to PRO', 'wp-knowledgebase' ); ?></a>
-			<?php endif; ?>
-		</nav>
-
+		<img src="<?php echo KBE_PLUGIN_DIR_URL; ?>/assets/images/kbe-logo.png" />
+		WP Knowledgebase
 	</div>
 
 	<?php

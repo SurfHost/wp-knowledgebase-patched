@@ -61,7 +61,7 @@ class KBE_Deactivation {
 								<label>
 									<input type="radio" name="kbe_disable_reason" value="technical-issue" />
 									<strong><?php echo __( 'Technical issues', 'wp-knowledgebase' ); ?></strong>
-									<p><?php echo sprintf( __( 'Please describe the issues below or %scontact us directly here%s. This will help us test and solve these problems in a timely manner.', 'wp-knowledgebase' ), '<a href="https://usewpknowledgebase.com/contact/" target="_blank">', '</a>' ); ?></p>
+									<p><?php echo __( 'Please describe the issues below. This will help us test and solve these problems in a timely manner.', 'wp-knowledgebase' ); ?></p>
 									<textarea name="kbe_disable_text[]" placeholder="<?php echo __( 'Type the issues here...', 'wp-knowledgebase' ); ?>"></textarea>
 								</label>
 							</li>
@@ -70,7 +70,7 @@ class KBE_Deactivation {
 			                	<label>
 			                		<input type="radio" name="kbe_disable_reason" value="missing-feature" />
 			                		<strong><?php echo __( 'Missing features I need', 'wp-knowledgebase' ); ?></strong>
-									<p><?php echo sprintf( __( 'Please describe the feature you need or %scontact us directly here%s. This will help us prioritize our tasks and work on the most requested features.', 'wp-knowledgebase' ), '<a href="https://usewpknowledgebase.com/contact/" target="_blank">', '</a>' ); ?></p>
+									<p><?php echo __( 'Please describe the feature you need. This will help us prioritize our tasks and work on the most requested features.', 'wp-knowledgebase' ); ?></p>
 									<textarea name="kbe_disable_text[]" placeholder="<?php echo __( 'Type the missing features here...', 'wp-knowledgebase' ); ?>"></textarea>
 								</label>
 							</li>
@@ -257,21 +257,8 @@ class KBE_Deactivation {
 		if( ! current_user_can( 'manage_options' ) )
 			wp_die( 0 );
 
-		if( isset( $_POST['data'] ) ) {
-	        parse_str( $_POST['data'], $form );
-	    }
-	    
-	    $subject = "WP Knowledgebase Deactivation Notification";
-	    $message = isset( $form['kbe_disable_reason'] ) ? 'Deactivation reason: ' . sanitize_text_field( $form['kbe_disable_reason'] ) : '(no reason given)';
-	    
-	    if( isset( $form['kbe_disable_text'] ) ) {
-	        $message .= "\n\r\n\r";
-	        $message .= 'Message: ' . sanitize_text_field( implode('', $form['kbe_disable_text']) );
-	    }
-	    
-	    $success = wp_mail( array( 'support@slicewp.com' ), $subject, $message );
-
-	    wp_die();
+		// Feedback is no longer sent externally
+		wp_die();
 
 	}
 

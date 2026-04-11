@@ -26,7 +26,7 @@ class KBE_Plugins_Screen_Updates {
 	 */
 	public function __construct() {
 
-		add_action( 'in_plugin_update_message-wp-knowledgebase/wp-knowledgebase.php', array( $this, 'in_plugin_update_message' ), 10, 2 );
+		// External update messages disabled — no longer fetching from original author's server.
 
 	}
 

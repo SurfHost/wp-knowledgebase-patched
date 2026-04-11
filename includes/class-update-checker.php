@@ -58,36 +58,9 @@ if( ! class_exists( 'KBE_PluginUpdateChecker' ) ) {
 		 * @return void
 		 */
 		function installHooks(){
-			//Override requests for plugin information
-			add_filter('plugins_api', array(&$this, 'injectInfo'), 10, 3);
-			
-			//Insert our update info into the update array maintained by WP
-			add_filter('site_transient_update_plugins', array(&$this,'injectUpdate')); //WP 3.0+
-			add_filter('transient_update_plugins', array(&$this,'injectUpdate')); //WP 2.8+
-			
-			//Set up the periodic update checks
-			$cronHook = 'check_plugin_updates-' . $this->slug;
-			if ( $this->checkPeriod > 0 ){
-				
-				//Trigger the check via Cron
-				add_filter('cron_schedules', array( $this, '_addCustomSchedule') );
-				
-				if ( !wp_get_schedule($cronHook) && !defined('WP_INSTALLING') ) {
-
-					$scheduleName = 'every' . $this->checkPeriod . 'hours';
-					wp_schedule_event(time(), $scheduleName, $cronHook);
-					
-				}
-				add_action($cronHook, array(&$this, 'checkForUpdates'));
-				
-				//In case Cron is disabled or unreliable, we also manually trigger 
-				//the periodic checks while the user is browsing the Dashboard. 
-				//add_action( 'admin_init', array(&$this, 'maybeCheckForUpdates') );
-				
-			} else {
-				//Periodic checks are disabled.
-				wp_clear_scheduled_hook($cronHook);
-			}
+			// External update checks disabled — this plugin is no longer updated
+			// from the original author's server.
+			return;
 		}
 		
 		/**

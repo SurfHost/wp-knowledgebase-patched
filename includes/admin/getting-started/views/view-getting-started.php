@@ -11,9 +11,7 @@ $finished_lessons = get_option( 'kbe_getting_started_finished_lessons', array() 
 
 	<div id="kbe-getting-started-wrapper">
 
-		<a href="https://usewpknowledgebase.com/" target="_blank">
-			<img src="<?php echo KBE_PLUGIN_DIR_URL; ?>/assets/images/kbe-logo.png" />
-		</a>
+		<img src="<?php echo KBE_PLUGIN_DIR_URL; ?>/assets/images/kbe-logo.png" />
 
 		<h1>Welcome to WP Knowledgebase</h1>
 		<h2>Thank you for choosing WP Knowledgebase. This 5 short lessons course is here to help you set up everything as you want it.</h2>
@@ -219,7 +217,7 @@ $finished_lessons = get_option( 'kbe_getting_started_finished_lessons', array() 
 					<li>Navigate to <strong>Settings &gt; Permalinks</strong>.<img src="<?php echo esc_attr( KBE_PLUGIN_DIR_URL ); ?>assets/images/doc-permalinks-sidebar-menu.png" alt="Permalink settings menu in WordPress admin dashboard"></li>
 					<li>Here, <strong>without modifying anything</strong>, save the changes. This will rebuild the permalink information, leading to the knowledge base articles loading properly.</li>
 				</ol>
-				<p>If you’re still having any issues with the knowledge base articles or pages, <a href="https://usewpknowledgebase.com/contact/" data-type="page" data-id="13">please contact us here</a> and describe the issue as detailed as possible.</p>
+				<p>If you’re still having any issues with the knowledge base articles or pages, please check the plugin documentation or contact your site administrator.</p>
 			</div>
 
 			<div class="kbe-card-footer">
