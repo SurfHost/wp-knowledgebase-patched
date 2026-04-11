@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.1 — Cleanup Release
+
+- Removed all external links to original author's site
+- Disabled update checker (no longer phones home)
+- Disabled license registration/deregistration
+- Disabled deactivation feedback email to external address
+- Removed PRO upgrade links and promo content
+- Cleaned up and simplified readme
+- Sanitized all `$_GET` usage in admin functions
+
 ## 2.0.0 — Security Hardening Release
 
 ### Security Fixes

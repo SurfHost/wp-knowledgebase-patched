@@ -2,7 +2,7 @@
 Contributors: surfhost, iova.mihai
 Tags: knowledgebase, knowledge base, documentation, wiki, faq
 Tested up to: 6.9.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,16 @@ Yes, use the built-in WordPress import/export under Tools.
 4. Available widgets
 
 == Changelog ==
+
+= 2.0.1 =
+* Removed all external links to original author's site
+* Disabled update checker (no longer phones home)
+* Disabled license registration/deregistration
+* Disabled deactivation feedback email to external address
+* Removed PRO upgrade links and promo content
+* Cleaned up and simplified readme
+* Sanitized all $_GET usage in admin functions
+* Updated author to SurfHost, preserved original credits in copyright
 
 = 2.0.0 =
 Security hardening release. Forked and maintained by SurfHost. Originally created by Mihai Iova.

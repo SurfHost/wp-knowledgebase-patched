@@ -3,7 +3,7 @@
  * Plugin Name: WP Knowledgebase
  * Plugin URI: http://wordpress.org/plugins/wp-knowledgebase
  * Description: Simple and flexible knowledgebase plugin for WordPress
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: SurfHost
  * Author URI: https://surfhost.nl
  * Text Domain: wp-knowledgebase
@@ -70,7 +70,7 @@ Class WP_Knowledgebase {
 	public function __construct() {
 
 		// Defining new constants
-		define( 'KBE_PLUGIN_VERSION', '2.0.0' );
+		define( 'KBE_PLUGIN_VERSION', '2.0.1' );
 		define( 'KBE_BASENAME',  	  plugin_basename( __FILE__ ) );
 		define( 'KBE_PLUGIN_DIR', 	  plugin_dir_path( __FILE__ ) );
 		define( 'KBE_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
