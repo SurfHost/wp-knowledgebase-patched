@@ -1,16 +1,19 @@
 === WP Knowledgebase ===
 Contributors: surfhost, iova.mihai
+Plugin URI: https://github.com/SurfHost/wp-knowledgebase-patched
 Tags: knowledgebase, knowledge base, documentation, wiki, faq
 Tested up to: 6.9.4
 Stable tag: 2.0.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-Simple and flexible knowledge base plugin for WordPress.
+Simple and flexible knowledge base plugin for WordPress. Security hardened fork of WP Knowledgebase by Mihai Iova.
 
 == Description ==
 
 Create a professional knowledge base or documentation site. WP Knowledgebase is easy to use, easy to customize, and works with any theme.
+
+This is a fork of WP Knowledgebase 1.3.4 by Mihai Iova (https://wordpress.org/plugins/wp-knowledgebase/), maintained by SurfHost (https://surfhost.nl) under the GPL-2.0-or-later. The original plugin and all of its design are his work. This fork is not distributed through the wordpress.org listing and will never appear as an update there, so the Plugin URI above points at the fork repository instead.
 
 = Features =
 
@@ -78,7 +81,7 @@ Yes, use the built-in WordPress import/export under Tools.
 * Updated author to SurfHost, preserved original credits in copyright
 
 = 2.0.0 =
-Security hardening release. Forked and maintained by SurfHost. Originally created by Mihai Iova.
+Security hardening release. Fork of WP Knowledgebase 1.3.4, originally created by Mihai Iova, forked and maintained by SurfHost under GPL-2.0-or-later.
 
 * Security: Fixed SQL injection in uninstall queries (all queries now use $wpdb->prepare())
 * Security: Fixed SQL injection in settings page query
@@ -90,13 +93,17 @@ Security hardening release. Forked and maintained by SurfHost. Originally create
 * Security: Added capability checks to order form processing
 * Security: Added nonce verification to live search AJAX
 * Security: Added capability checks to license AJAX handlers
-* Security: Fixed widget input sanitization
+* Security: Widget settings sanitized on save in all four widget classes, and widget heading escaped on output
 * Security: Removed disabled SSL verification on external API calls
 * Security: Replaced unsafe scandir() with glob() for file inclusion
 * Security: Added path traversal protection to theme support inclusion
 * Security: Removed unsafe regex modification of $_GET superglobal
 * Change: Version bumped to 2.0.0
-* Change: Author updated to SurfHost
+* Change: Fork author set to SurfHost, original credit retained
+
+Not fixed in 2.0.0, despite earlier wording that implied otherwise: the category
+widget still outputs term names and term links unescaped, and every widget form()
+echoes stored settings into value="" without esc_attr(). See CHANGELOG.md.
 
 = 1.3.4 =
 * New: Added [kbe_breadcrumbs] and [kbe_live_search] shortcodes

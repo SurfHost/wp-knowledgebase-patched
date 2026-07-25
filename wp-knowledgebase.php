@@ -1,17 +1,27 @@
 <?php
 /**
  * Plugin Name: WP Knowledgebase
- * Plugin URI: http://wordpress.org/plugins/wp-knowledgebase
- * Description: Simple and flexible knowledgebase plugin for WordPress
+ * Plugin URI: https://github.com/SurfHost/wp-knowledgebase-patched
+ * Description: Simple and flexible knowledgebase plugin for WordPress. Security hardened fork of WP Knowledgebase by Mihai Iova.
  * Version: 2.0.1
  * Author: SurfHost
  * Author URI: https://surfhost.nl
  * Text Domain: wp-knowledgebase
- * License: GPL2
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ *
+ * == Upstream ==
+ * This plugin is a fork of WP Knowledgebase 1.3.4 by Mihai Iova
+ * (https://wordpress.org/plugins/wp-knowledgebase/). All original work is his;
+ * SurfHost maintains only the fork. Plugin URI deliberately points at the fork
+ * repository and NOT at the upstream wordpress.org listing, because pointing it
+ * upstream both misattributes the fork and tells site owners to look for updates
+ * somewhere that will never ship them.
  *
  * == Copyright ==
- * Copyright 2020 Mihai Iova, 2026 SurfHost
- *	
+ * Copyright 2020 Mihai Iova (original WP Knowledgebase)
+ * Copyright 2026 SurfHost (fork changes)
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or

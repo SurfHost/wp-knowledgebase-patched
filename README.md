@@ -1,6 +1,14 @@
 # WP Knowledgebase
 
-Simple and flexible knowledge base plugin for WordPress. Security hardened fork, maintained by [SurfHost](https://surfhost.nl). Originally created by Mihai Iova.
+Simple and flexible knowledge base plugin for WordPress.
+
+## Credits and upstream
+
+This is a fork of [WP Knowledgebase](https://wordpress.org/plugins/wp-knowledgebase/) **1.3.4 by Mihai Iova**. The original plugin, its templates and its design are his work. This fork adds security hardening and removes the licensing / phone-home code, and is maintained by [SurfHost](https://surfhost.nl).
+
+The fork is distributed under the GPL-2.0-or-later, the same license as the upstream plugin. See [LICENSE](LICENSE) for the full text.
+
+The plugin's `Plugin URI` points at this fork's repository rather than at the upstream wordpress.org listing, on purpose: the listing is Mihai Iova's, and pointing there would both misattribute the fork and send site owners looking for updates that will never be published there.
 
 ## Features
 
@@ -35,17 +43,24 @@ Copy the `template` folder from the plugin into your active theme and rename it 
 - Removed PRO upgrade links and promo content
 - Sanitized all `$_GET` usage in admin functions
 
-### 2.0.0 — Security Hardening
+### 2.0.0 > Security Hardening
 - Fixed SQL injection in uninstall, settings, order, and template queries
-- Fixed XSS in legacy templates, widgets, and breadcrumbs
+- Fixed XSS in legacy templates and breadcrumbs
 - Added CSRF protection to order forms
 - Added capability checks and nonce verification to AJAX handlers
-- Fixed widget input sanitization
+- Sanitized widget settings on save, and escaped the widget heading on output
 - Replaced unsafe `scandir()` with `glob()` for file inclusion
 - Added path traversal protection to theme support inclusion
+
+Note: widget output escaping is only partly done. The category widget still
+echoes term names and term links unescaped. See the "Known issues" section in
+[CHANGELOG.md](CHANGELOG.md) for the exact scope.
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
 ## License
 
-GPLv2 or later
+GPL-2.0-or-later. See [LICENSE](LICENSE).
+
+Original WP Knowledgebase is copyright Mihai Iova and also GPL-2.0-or-later; the
+fork inherits that license and cannot be relicensed.

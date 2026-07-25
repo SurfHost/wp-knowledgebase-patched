@@ -1,0 +1,56 @@
+name: CI
+
+# This repo had no CI at all, so a syntax error in a PHP file could land on a
+# live WordPress install before anyone noticed. This workflow does the cheapest
+# check that actually executes something: a real parse of every PHP file.
+#
+# Deliberately NOT running PHPCS with the WordPress standard: the repo has no
+# phpcs config, and dropping the WP standard on a 1.3.4-era fork would produce
+# thousands of pre-existing failures and a permanently red build, which trains
+# people to ignore CI. Add phpcs.xml first if that check is wanted.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-lint:
+    name: PHP ${{ matrix.php-version }} syntax lint
+    runs-on: ubuntu-latest
+
+    strategy:
+      # Do not stop at the first red version; knowing whether a failure is
+      # version specific or applies to both is the whole point of the matrix.
+      fail-fast: false
+      matrix:
+        # 8.1 is the realistic floor for the WordPress installs this ships to,
+        # 8.3 is the forward check.
+        php-version:
+          - '8.1'
+          - '8.3'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f # 2.35.5
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          # Only the parser is needed here, so keep the install minimal.
+          tools: none
+
+      - name: Lint all PHP files
+        # -print0 / xargs -0 because template paths may contain spaces, and
+        # -n1 so every file is reported individually instead of stopping at the
+        # first bad one. xargs exits non-zero if any php -l failed, which fails
+        # the job.
+        run: |
+          find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l

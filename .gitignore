@@ -1,0 +1,26 @@
+# Dependencies. Nothing in here is ours and the CI lint skips vendor/ anyway,
+# so committing it would only make the fork diff against upstream unreadable.
+node_modules/
+vendor/
+
+# OS cruft. desktop.ini in particular gets picked up by the WordPress plugin
+# zip if it is committed, and then ships to every install.
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local logs and debug output
+*.log
+debug.log
+
+# Editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Build output
+/build/
+/dist/
+*.zip
