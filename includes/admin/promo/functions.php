@@ -86,4 +86,4 @@ add_filter( 'kbe_register_submenu_page', 'kbe_register_submenu_page_promo_search
  * the content restriction add-on
  *
  */
-// Content restriction promo removed — no longer linking to external site.
+// Content restriction promo removed > no longer linking to external site.

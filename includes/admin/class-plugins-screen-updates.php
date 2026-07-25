@@ -26,7 +26,7 @@ class KBE_Plugins_Screen_Updates {
 	 */
 	public function __construct() {
 
-		// External update messages disabled — no longer fetching from original author's server.
+		// External update messages disabled > no longer fetching from original author's server.
 
 	}
 

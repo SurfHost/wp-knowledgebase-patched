@@ -674,7 +674,7 @@ abstract class KBE_WP_List_Table {
 
 		// No comments at all.
 		if ( ! $approved_comments && ! $pending_comments ) {
-			printf( '<span aria-hidden="true">—</span><span class="screen-reader-text">%s</span>',
+			printf( '<span aria-hidden="true">-</span><span class="screen-reader-text">%s</span>',
 				__( 'No comments' )
 			);
 		// Approved comments have different display depending on some conditions.

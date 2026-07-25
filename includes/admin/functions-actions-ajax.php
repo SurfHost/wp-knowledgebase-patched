@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 /**
- * License registration — no longer phones home to external server
+ * License registration > no longer phones home to external server
  *
  */
 function kbe_action_ajax_register_website() {
@@ -17,7 +17,7 @@ add_action( 'wp_ajax_kbe_action_ajax_register_website', 'kbe_action_ajax_registe
 
 
 /**
- * License deregistration — no longer phones home to external server
+ * License deregistration > no longer phones home to external server
  *
  */
 function kbe_action_ajax_deregister_website() {

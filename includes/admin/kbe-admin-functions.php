@@ -83,7 +83,7 @@ function kbe_admin_scripts( $hook_suffix ) {
 	if( ! empty( $_GET['post_type'] ) && false !== strpos( sanitize_text_field( wp_unslash( $_GET['post_type'] ) ), 'kbe_knowledgebase' ) ) {
 
 		wp_enqueue_script( 'kbe-script', WP_KNOWLEDGEBASE . 'assets/js/script-admin.js', array( 'wp-color-picker', 'jquery-ui-datepicker' ), KBE_PLUGIN_VERSION, true );
-	
+
 	}
 
 	// Order page
@@ -336,7 +336,7 @@ function kbe_admin_notice_dismiss() {
 		return;
 
 	if( isset( $_GET['kbe_admin_notice_plugin_version_1_2_4'] ) ) {
-		// Value is not used, just checking for key presence — sanitize for consistency
+		// Value is not used, just checking for key presence > sanitize for consistency
 		sanitize_text_field( wp_unslash( $_GET['kbe_admin_notice_plugin_version_1_2_4'] ) );
 		add_user_meta( get_current_user_id(), 'kbe_admin_notice_plugin_version_1_2_4', 1, true );
 	}
@@ -349,14 +349,14 @@ add_action( 'admin_init', 'kbe_admin_notice_dismiss' );
  * Adds external links to the admin submenu
  *
  */
-// Upgrade submenu item removed — no longer linking to external site.
+// Upgrade submenu item removed > no longer linking to external site.
 
 
 /**
  * Adds a script to make external links to the site open in a new tab
  *
  */
-// External menu items script removed — no longer linking to external site.
+// External menu items script removed > no longer linking to external site.
 
 
 /**
